@@ -4,6 +4,7 @@ export type FooterLink = {
   id?: string;
   label: string;
   href: string;
+  description?: string;
   external?: boolean;
   status?: string;
 };
@@ -11,6 +12,7 @@ export type FooterLink = {
 export type FooterColumn = {
   title: string;
   accent?: boolean;
+  description?: string;
   links: FooterLink[];
 };
 
@@ -26,17 +28,33 @@ export type FooterTheme = {
   fontFamily?: string;
 };
 
+export type FooterMode = 'light' | 'dark' | 'auto';
+
 export type CanonicalSite = {
   id: string;
   label: string;
   href: string | null;
   kind: string;
+  description?: string;
   status: string;
   showInFooter: boolean;
 };
 
+export type FooterSection = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  visual?: React.ReactNode;
+  linksTitle?: string;
+  links?: FooterLink[];
+  anthusLinks?: FooterLink[];
+  platformLinks?: FooterLink[];
+  columns?: FooterColumn[];
+};
+
 export type AnthusFooterProps = {
   siteId?: string;
+  mode?: FooterMode;
   productName?: string;
   subtitle?: string;
   description?: string;
@@ -44,6 +62,8 @@ export type AnthusFooterProps = {
   brandLinks?: FooterLink[];
   platformLinks?: FooterLink[];
   additionalColumns?: FooterColumn[];
+  localSection?: FooterSection;
+  globalSection?: FooterSection;
   byline?: string;
   logo?: React.ReactNode;
   theme?: FooterTheme;
@@ -52,6 +72,8 @@ export type AnthusFooterProps = {
 export const defaultCommunityLinks: FooterLink[];
 export const defaultBrandLinks: FooterLink[];
 export const defaultPlatformLinks: FooterLink[];
+export const defaultDarkTheme: FooterTheme;
+export const defaultLightTheme: FooterTheme;
 
 export const canonicalSites: Record<string, CanonicalSite>;
 export const canonicalSiteList: CanonicalSite[];
