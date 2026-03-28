@@ -1,0 +1,30 @@
+{
+  "name": "anthus-footer",
+  "version": "0.1.0",
+  "description": "Shared footer component for Anthus platform marketing sites",
+  "type": "module",
+  "main": "./src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthusAI/anthus-footer.git"
+  },
+  "homepage": "https://github.com/AnthusAI/anthus-footer",
+  "exports": {
+    ".": "./src/index.js",
+    "./sites": "./src/sites.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "keywords": [
+    "anthus",
+    "footer",
+    "react",
+    "marketing"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}
