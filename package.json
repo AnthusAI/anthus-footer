@@ -4,6 +4,7 @@
   "description": "Shared footer component for Anthus platform marketing sites",
   "type": "module",
   "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AnthusAI/anthus-footer.git"
