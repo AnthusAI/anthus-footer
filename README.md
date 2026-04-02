@@ -96,23 +96,34 @@ Props:
 
 - `byline`: Bottom-row text
 - `logo`: Optional React node rendered above the brand copy
+- `className`: Optional class on the root `<footer>` element
 - `theme`: Optional style overrides
 
 ### Theme keys
 
 ```js
 {
+  background: 'var(--footer-bg)',
   footerBackground: '#27213a',
+  groupedBackground: 'var(--region-alt)',
   panelBackground: '#332b49',
   accentBackground: '#3c3357',
+  foreground: 'var(--foreground)',
   textColor: '#f7f4ff',
+  mutedForeground: 'var(--muted-foreground)',
   mutedTextColor: '#cbbfef',
+  link: 'var(--foreground)',
   linkColor: '#f7f4ff',
   borderRadius: '8px',
   maxWidth: '1120px',
-  fontFamily: 'inherit'
+  fontFamily: 'inherit',
+  fontFamilyBody: 'var(--font-body)',
+  fontFamilyHeading: 'var(--font-heading)'
 }
 ```
+
+Theme values can be plain colors or CSS variable references such as `var(--footer-bg)` or
+`hsl(var(--background))`, depending on how the host site exposes its tokens.
 
 ## Exports
 
@@ -162,7 +173,7 @@ const canonicalPlatformUrl = canonicalSites.anthusPlatform.href;
 - `Plexus`: use the shared footer in the dashboard landing/footer surface, but keep product-specific documentation links in an extra column.
 - `Tactus-web`: import the package directly as a Gatsby dependency, similar to existing GitHub-based shared dependencies in that repo.
 - `Korpor.us` and `Kanb.us`: use the shared footer for the public site layouts and keep product-specific links in an additional column.
-- `Biblicus`: keep the canonical URL in the registry immediately; adopting the React footer on the GitHub Pages docs site may require a docs-theme integration step rather than the same layout swap used by Gatsby/Next sites.
+- `Biblicus`: keep the canonical URL in the registry immediately, but treat docs as a separate integration path. The docs footer is rendered from `docs/_templates/footer.html` and styled in `docs/_themes/biblicus_rtd/static/css/biblicus.css`, so alignment there should come from mirrored tokens/copy rather than mounting the React footer directly into Sphinx.
 - `Babulus`: use the canonical `https://babul.us/` marketing site in the registry even if product-app surfaces remain separate.
 - `Caducus`: now has a live canonical URL in the registry.
 - `Virtuus`: intentionally omitted from live footer lists until the public URL is finalized.

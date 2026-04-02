@@ -5,18 +5,22 @@ export const defaultCommunityLinks = [
   {
     label: 'Contact us',
     href: 'https://docs.google.com/forms/d/e/1FAIpQLSdWlt4KpwPSBHzg3o8fikHcfrzxo5rCcV-0-zDt815NZ1tcyg/viewform?usp=sf_link',
+    description: 'How can we help?',
   },
   {
     label: 'GitHub',
     href: 'https://github.com/AnthusAI',
+    description: 'Browse the code.',
   },
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/ryanalynporter/',
+    description: 'Company updates.',
   },
   {
     label: 'Discord',
     href: 'https://discord.gg/uStyWraJ2M',
+    description: 'Join the chat.',
   },
 ];
 
@@ -24,57 +28,63 @@ export const defaultBrandLinks = getAnthusLinks();
 export const defaultPlatformLinks = getPlatformLinks();
 
 export const defaultDarkTheme = {
+  background: '#27213a',
   footerBackground: '#27213a',
+  groupedBackground: '#3c3357',
   panelBackground: '#332b49',
   accentBackground: '#3c3357',
+  foreground: '#f7f4ff',
   textColor: '#f7f4ff',
+  mutedForeground: '#cbbfef',
   mutedTextColor: '#cbbfef',
+  link: '#f7f4ff',
   linkColor: '#f7f4ff',
   borderRadius: '8px',
   maxWidth: '1120px',
   fontFamily: 'inherit',
+  fontFamilyBody: 'inherit',
+  fontFamilyHeading: 'inherit',
 };
 
 export const defaultLightTheme = {
+  background: '#f2eefb',
   footerBackground: '#f2eefb',
+  groupedBackground: '#e8e0fb',
   panelBackground: '#ffffff',
   accentBackground: '#e8e0fb',
+  foreground: '#271f3a',
   textColor: '#271f3a',
+  mutedForeground: '#6d618b',
   mutedTextColor: '#6d618b',
+  link: '#271f3a',
   linkColor: '#271f3a',
   borderRadius: '8px',
   maxWidth: '1120px',
   fontFamily: 'inherit',
+  fontFamilyBody: 'inherit',
+  fontFamilyHeading: 'inherit',
 };
 
 const defaultGlobalDescription =
-  'The Anthus Platform is the shared product stack behind Anthus delivery: reusable runtimes, tools, and product surfaces that work together across AI-native systems.';
+  'This product is part of the Anthus Platform: shared runtimes, tools, and product surfaces for AI-native systems.';
 
 const baseStyles = {
   footer: theme => ({
     width: '100%',
     backgroundColor: theme.footerBackground,
     color: theme.textColor,
-    padding: '1.5rem 1rem',
-    fontFamily: theme.fontFamily,
+    padding: '1.5rem 0',
+    fontFamily: theme.fontFamilyBody,
   }),
   shell: theme => ({
     maxWidth: theme.maxWidth,
     margin: '0 auto',
-  }),
-  topLinks: theme => ({
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '0.75rem 1rem',
-    justifyContent: 'center',
-    marginBottom: '1rem',
-    fontSize: '0.95rem',
-    color: theme.mutedTextColor,
+    padding: '0 1rem',
   }),
   link: theme => ({
     color: theme.linkColor,
     textDecoration: 'none',
-    fontWeight: 600,
+    fontWeight: 400,
   }),
   contentGrid: {
     display: 'grid',
@@ -90,29 +100,46 @@ const baseStyles = {
     gap: '1rem',
     alignContent: 'start',
   },
-  visualFrame: () => ({
+  groupedBand: theme => ({
+    width: '100%',
+    backgroundColor: theme.groupedBackground,
+    marginTop: '2rem',
+    padding: '1.25rem 0',
+  }),
+  groupedSection: {
+    display: 'grid',
+    gap: '1rem',
+    alignContent: 'start',
+  },
+  visualFrame: theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '84px',
+    padding: '0.25rem',
   }),
   eyebrow: theme => ({
     display: 'inline-block',
-    marginBottom: '0.35rem',
+    marginBottom: '0.1rem',
     textTransform: 'uppercase',
     letterSpacing: '0.08em',
-    fontSize: '0.74rem',
-    fontWeight: 700,
+    fontSize: '0.68rem',
+    fontWeight: 500,
     color: theme.mutedTextColor,
+    fontFamily: theme.fontFamilyHeading,
   }),
-  title: {
+  title: theme => ({
     margin: 0,
-    fontSize: '1.35rem',
-    lineHeight: 1.2,
-  },
+    fontSize: '1.12rem',
+    lineHeight: 1.25,
+    fontWeight: 400,
+    fontFamily: theme.fontFamilyHeading,
+  }),
   description: theme => ({
     margin: 0,
-    lineHeight: 1.65,
+    fontSize: '0.92rem',
+    lineHeight: 1.55,
+    fontWeight: 300,
     color: theme.mutedTextColor,
   }),
   columns: {
@@ -120,9 +147,15 @@ const baseStyles = {
     gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
     gap: '1rem 2rem',
   },
+  localGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+    gap: '1rem 1.5rem',
+    alignItems: 'start',
+  },
   platformIntro: {
     display: 'grid',
-    gridTemplateColumns: 'minmax(84px, auto) minmax(0, 1fr)',
+    gridTemplateColumns: 'minmax(0, 1fr) minmax(48px, auto)',
     gap: '1rem',
     alignItems: 'center',
   },
@@ -136,16 +169,28 @@ const baseStyles = {
     gap: '0.35rem',
     alignContent: 'start',
   },
+  communityGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+    gap: '1rem 1.5rem',
+    marginTop: '1.25rem',
+  },
+  communityItem: {
+    display: 'grid',
+    gap: '0.3rem',
+    alignContent: 'start',
+  },
   columnTitle: theme => ({
     margin: '0 0 0.5rem',
-    fontSize: '0.94rem',
+    fontSize: '0.82rem',
     color: theme.mutedTextColor,
-    fontWeight: 700,
+    fontWeight: 500,
+    fontFamily: theme.fontFamilyHeading,
   }),
   itemLink: theme => ({
     ...baseStyles.link(theme),
-    fontSize: '1rem',
-    fontWeight: 600,
+    fontSize: '0.92rem',
+    fontWeight: 500,
   }),
   list: {
     listStyle: 'none',
@@ -155,14 +200,17 @@ const baseStyles = {
     gap: '0.35rem',
   },
   helperText: theme => ({
-    margin: '0 0 0.75rem',
-    lineHeight: 1.6,
+    margin: 0,
+    fontSize: '0.84rem',
+    lineHeight: 1.5,
+    fontWeight: 300,
     color: theme.mutedTextColor,
   }),
   bottomRow: theme => ({
-    marginTop: '1rem',
+    marginTop: '1.5rem',
     color: theme.mutedTextColor,
-    fontSize: '0.9rem',
+    fontSize: '0.82rem',
+    fontWeight: 300,
     display: 'flex',
     flexWrap: 'wrap',
     gap: '0.5rem 1rem',
@@ -208,10 +256,28 @@ function useResolvedMode(mode) {
   return resolvedMode;
 }
 
-const mergeTheme = (mode, theme) => ({
-  ...(mode === 'light' ? defaultLightTheme : defaultDarkTheme),
-  ...(theme || {}),
-});
+const normalizeTheme = theme => {
+  const source = theme || {};
+
+  return {
+    ...source,
+    footerBackground: source.background ?? source.footerBackground,
+    groupedBackground: source.groupedBackground ?? source.accentBackground,
+    panelBackground: source.panelBackground,
+    textColor: source.foreground ?? source.textColor,
+    mutedTextColor: source.mutedForeground ?? source.mutedTextColor,
+    linkColor: source.link ?? source.linkColor ?? source.foreground ?? source.textColor,
+    fontFamilyBody: source.fontFamilyBody ?? source.fontFamily ?? 'inherit',
+    fontFamilyHeading:
+      source.fontFamilyHeading ?? source.fontFamilyBody ?? source.fontFamily ?? 'inherit',
+  };
+};
+
+const mergeTheme = (mode, theme) =>
+  normalizeTheme({
+    ...(mode === 'light' ? defaultLightTheme : defaultDarkTheme),
+    ...(theme || {}),
+  });
 
 const renderLinks = (links, theme) =>
   links.map(link =>
@@ -224,7 +290,7 @@ const renderLinks = (links, theme) =>
           href: link.href,
           style: {
             ...baseStyles.link(theme),
-            fontWeight: 500,
+            fontWeight: 400,
           },
           target: link.external === false ? undefined : '_blank',
           rel: link.external === false ? undefined : 'noreferrer',
@@ -272,12 +338,34 @@ const renderPlatformItems = (items, theme) =>
     )
   );
 
+const renderCommunityItems = (items, theme) =>
+  items.map(item =>
+    React.createElement(
+      'div',
+      { key: item.id || item.label, style: baseStyles.communityItem },
+      React.createElement(
+        'a',
+        {
+          href: item.href,
+          style: baseStyles.itemLink(theme),
+          target: item.external === false ? undefined : '_blank',
+          rel: item.external === false ? undefined : 'noreferrer',
+        },
+        item.label
+      ),
+      item.description
+        ? React.createElement('p', { style: baseStyles.helperText(theme) }, item.description)
+        : null
+    )
+  );
+
 export function AnthusFooter({
   siteId = 'anthus',
   mode = 'dark',
+  className,
   productName = 'Anthus AI Solutions',
   subtitle = '',
-  description = 'Anthus builds AI-native systems with durable procedures, operational guardrails, and reusable platform components.',
+  description = 'We build powerful, AI-native solutions backed by durable procedures, rigorous operational guardrails, and our suite of battle-tested, reusable platform components.',
   communityLinks = defaultCommunityLinks,
   brandLinks = defaultBrandLinks,
   platformLinks,
@@ -295,17 +383,19 @@ export function AnthusFooter({
   const resolvedLocalEyebrow = localSection?.eyebrow || subtitle;
   const resolvedLocalDescription = localSection?.description || description;
   const resolvedLocalVisual = localSection?.visual || logo;
-  const resolvedLocalLinks = localSection?.links || [];
-  const resolvedLocalLinksTitle = localSection?.linksTitle || 'Product';
-  const resolvedPlatformExclusions =
-    platformSiteIds.has(siteId) && !platformLinks ? [siteId] : [];
+  const resolvedLocalLinks = localSection?.links || (siteId === 'anthus' ? brandLinks : []);
+  const resolvedLocalLinksTitle = localSection?.linksTitle || (siteId === 'anthus' ? 'Anthus' : 'Product');
   const resolvedPlatformLinks =
-    platformLinks || getPlatformLinks({ excludeIds: resolvedPlatformExclusions, includeNonLive: false });
-  const resolvedGlobalEyebrow = globalSection?.eyebrow || '';
-  const resolvedGlobalTitle = globalSection?.title || 'Anthus Platform';
-  const resolvedGlobalDescription = globalSection?.description || defaultGlobalDescription;
+    platformLinks || getPlatformLinks({ includeNonLive: false });
+  const resolvedGlobalEyebrow =
+    globalSection?.eyebrow !== undefined
+      ? globalSection.eyebrow
+      : siteId === 'anthus'
+      ? null
+      : 'PART OF';
+  const resolvedGlobalTitle = globalSection?.title || 'The Anthus Platform';
+  const resolvedGlobalDescription = globalSection?.description || 'Solve complex business problems with AI and ML using a proven, reusable technology stack. These interoperable building blocks give our solutions a stronger operational foundation: durable procedures, MLOps control loops, workload orchestration, knowledge systems, observability, and programmable media workflows.';
   const resolvedGlobalVisual = globalSection?.visual || null;
-  const resolvedAnthusLinks = globalSection?.anthusLinks || brandLinks;
   const resolvedGlobalColumns = globalSection?.columns || [];
   const localColumns = [...additionalColumns];
 
@@ -321,106 +411,94 @@ export function AnthusFooter({
     description: link.description || canonicalSites[link.id]?.description,
   }));
 
-  const globalColumns = [{ title: 'Anthus', links: resolvedAnthusLinks }, ...resolvedGlobalColumns];
+  const globalColumns = [...resolvedGlobalColumns];
 
   const localPanelChildren = [
     React.createElement(
       'div',
-      { key: 'local-copy' },
+      { key: 'local-copy', style: { display: 'grid', gap: '0.35rem' } },
       resolvedLocalEyebrow
         ? React.createElement(
             'span',
-            { style: baseStyles.eyebrow(mergedTheme) },
+            { style: { ...baseStyles.eyebrow(mergedTheme), marginBottom: 0 } },
             resolvedLocalEyebrow
           )
         : null,
-      React.createElement('h2', { style: baseStyles.title }, resolvedProductName),
+      React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
       React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedLocalDescription)
     ),
   ];
 
   return React.createElement(
     'footer',
-    { style: baseStyles.footer(mergedTheme), 'data-color-mode': resolvedMode },
+    { style: baseStyles.footer(mergedTheme), className, 'data-color-mode': resolvedMode },
     React.createElement(
       'div',
       { style: baseStyles.shell(mergedTheme) },
       React.createElement(
         'div',
-        { style: baseStyles.topLinks(mergedTheme) },
-        communityLinks.map((link, index) =>
-          React.createElement(
-            React.Fragment,
-            { key: `${link.label}-${link.href}` },
-            React.createElement(
-              'a',
-              {
-                href: link.href,
-                style: baseStyles.link(mergedTheme),
-                target: link.external === false ? undefined : '_blank',
-                rel: link.external === false ? undefined : 'noreferrer',
-              },
-              link.label
-            ),
-            index < communityLinks.length - 1
-              ? React.createElement('span', { 'aria-hidden': true }, '·')
-              : null
-          )
+        { style: baseStyles.section },
+        React.createElement(
+          'div',
+          { style: baseStyles.localGrid },
+          React.createElement('div', { style: baseStyles.localIntro }, ...localPanelChildren),
+          ...renderSectionColumns(localColumns, mergedTheme)
         )
-      ),
+      )
+    ),
+    globalSection !== false ? React.createElement(
+      'div',
+      { style: baseStyles.groupedBand(mergedTheme) },
       React.createElement(
         'div',
-        { style: baseStyles.contentGrid },
+        { style: baseStyles.shell(mergedTheme) },
         React.createElement(
           'div',
-          { style: baseStyles.section },
-          React.createElement(
-            'div',
-            { style: { display: 'grid', gap: '1rem' } },
-            React.createElement('div', { style: baseStyles.localIntro }, ...localPanelChildren)
-          ),
-          localColumns.length > 0
-            ? React.createElement('div', { style: baseStyles.columns }, ...renderSectionColumns(localColumns, mergedTheme))
-            : null
-        ),
-        React.createElement(
-          'div',
-          { style: baseStyles.section },
-          resolvedGlobalEyebrow
-            ? React.createElement(
-                'span',
-                { style: baseStyles.eyebrow(mergedTheme) },
-                resolvedGlobalEyebrow
-              )
-            : null,
+          { style: baseStyles.groupedSection },
           React.createElement(
             'div',
             { style: baseStyles.platformIntro },
+            React.createElement(
+              'div',
+              { key: 'global-copy', style: { display: 'grid', gap: '0.35rem' } },
+              resolvedGlobalEyebrow
+                ? React.createElement(
+                    'span',
+                    { style: { ...baseStyles.eyebrow(mergedTheme), marginBottom: 0 } },
+                    resolvedGlobalEyebrow
+                  )
+                : null,
+              React.createElement('h2', { className: "platformHeader", style: { ...baseStyles.title(mergedTheme), margin: 0 } }, resolvedGlobalTitle),
+              React.createElement('p', { style: { ...baseStyles.description(mergedTheme), margin: 0 } }, resolvedGlobalDescription)
+            ),
             resolvedGlobalVisual
               ? React.createElement(
                   'div',
                   { key: 'global-visual', style: baseStyles.visualFrame(mergedTheme) },
                   resolvedGlobalVisual
                 )
-              : null,
-            React.createElement(
-              'div',
-              { key: 'global-copy' },
-              React.createElement('h2', { style: baseStyles.title }, resolvedGlobalTitle),
-              React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedGlobalDescription)
-            )
+              : null
           ),
           globalColumns.length > 0
             ? React.createElement('div', { style: baseStyles.columns }, ...renderSectionColumns(globalColumns, mergedTheme))
             : null,
-          React.createElement('div', { style: baseStyles.platformGrid }, ...renderPlatformItems(resolvedPlatformItems, mergedTheme))
+          React.createElement('div', { style: baseStyles.platformGrid }, ...renderPlatformItems(resolvedPlatformItems, mergedTheme)),
+          React.createElement(
+            'div',
+            { style: baseStyles.bottomRow(mergedTheme) },
+            React.createElement('span', null, 'Free and open-source software'),
+            React.createElement('span', null, byline)
+          )
         )
-      ),
+      )
+    ) : null,
+    React.createElement(
+      'div',
+      { style: baseStyles.shell(mergedTheme) },
       React.createElement(
         'div',
-        { style: baseStyles.bottomRow(mergedTheme) },
-        React.createElement('span', null, byline),
-        React.createElement('span', null, 'Free and open-source Anthus platform components where applicable')
+        { style: baseStyles.communityGrid },
+        ...renderCommunityItems(communityLinks, mergedTheme)
       )
     )
   );

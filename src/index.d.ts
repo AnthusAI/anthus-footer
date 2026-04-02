@@ -17,15 +17,22 @@ export type FooterColumn = {
 };
 
 export type FooterTheme = {
+  background?: string;
   footerBackground?: string;
+  groupedBackground?: string;
   panelBackground?: string;
   accentBackground?: string;
+  foreground?: string;
   textColor?: string;
+  mutedForeground?: string;
   mutedTextColor?: string;
+  link?: string;
   linkColor?: string;
   borderRadius?: string;
   maxWidth?: string;
   fontFamily?: string;
+  fontFamilyBody?: string;
+  fontFamilyHeading?: string;
 };
 
 export type FooterMode = 'light' | 'dark' | 'auto';
@@ -55,6 +62,7 @@ export type FooterSection = {
 export type AnthusFooterProps = {
   siteId?: string;
   mode?: FooterMode;
+  className?: string;
   productName?: string;
   subtitle?: string;
   description?: string;
