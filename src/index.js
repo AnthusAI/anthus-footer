@@ -95,6 +95,14 @@ const baseStyles = {
     display: 'grid',
     gap: '0.75rem',
   },
+  localBody: {
+    display: 'block',
+  },
+  localVisualFloat: {
+    float: 'right',
+    margin: '0 0 0.75rem 1rem',
+    maxWidth: '64px',
+  },
   section: {
     display: 'grid',
     gap: '1rem',
@@ -134,6 +142,11 @@ const baseStyles = {
     lineHeight: 1.25,
     fontWeight: 400,
     fontFamily: theme.fontFamilyHeading,
+  }),
+  titleLink: theme => ({
+    ...baseStyles.link(theme),
+    color: theme.linkColor,
+    fontWeight: 400,
   }),
   description: theme => ({
     margin: 0,
@@ -394,6 +407,8 @@ export function AnthusFooter({
       ? null
       : 'PART OF';
   const resolvedGlobalTitle = globalSection?.title || 'The Anthus Platform';
+  const resolvedGlobalTitleHref =
+    globalSection?.titleHref || canonicalSites['anthus-platform']?.href || 'https://anth.us/platform';
   const resolvedGlobalDescription = globalSection?.description || 'Solve complex business problems with AI and ML using a proven, reusable technology stack. These interoperable building blocks give our solutions a stronger operational foundation: durable procedures, MLOps control loops, workload orchestration, knowledge systems, observability, and programmable media workflows.';
   const resolvedGlobalVisual = globalSection?.visual || null;
   const resolvedGlobalColumns = globalSection?.columns || [];
@@ -424,8 +439,19 @@ export function AnthusFooter({
             resolvedLocalEyebrow
           )
         : null,
-      React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
-      React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedLocalDescription)
+      React.createElement(
+        'div',
+        { style: baseStyles.localBody },
+        resolvedLocalVisual
+          ? React.createElement(
+              'div',
+              { key: 'local-visual', style: baseStyles.localVisualFloat },
+              resolvedLocalVisual
+            )
+          : null,
+        React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
+        React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedLocalDescription)
+      )
     ),
   ];
 
@@ -468,7 +494,18 @@ export function AnthusFooter({
                     resolvedGlobalEyebrow
                   )
                 : null,
-              React.createElement('h2', { className: "platformHeader", style: { ...baseStyles.title(mergedTheme), margin: 0 } }, resolvedGlobalTitle),
+              React.createElement(
+                'h2',
+                { className: "platformHeader", style: { ...baseStyles.title(mergedTheme), margin: 0 } },
+                React.createElement(
+                  'a',
+                  {
+                    href: resolvedGlobalTitleHref,
+                    style: baseStyles.titleLink(mergedTheme),
+                  },
+                  resolvedGlobalTitle
+                )
+              ),
               React.createElement('p', { style: { ...baseStyles.description(mergedTheme), margin: 0 } }, resolvedGlobalDescription)
             ),
             resolvedGlobalVisual

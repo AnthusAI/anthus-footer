@@ -180,6 +180,7 @@ export const TactusVariant = {
     title: 'Tactus',
     description:
       'A durable execution environment for AI agent procedures, ensuring long-running processes, complex state management, and reliable fault tolerance without losing context.',
+    linksTitle: 'Tactus',
     links: [
       { label: 'Getting Started', href: '/getting-started', external: false },
       { label: 'Features', href: '/features', external: false },

@@ -50,6 +50,7 @@ export type CanonicalSite = {
 export type FooterSection = {
   eyebrow?: string;
   title?: string;
+  titleHref?: string;
   description?: string;
   visual?: React.ReactNode;
   linksTitle?: string;
