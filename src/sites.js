@@ -62,7 +62,7 @@ export const canonicalSites = {
   biblicus: {
     id: 'biblicus',
     label: 'Biblicus',
-    href: 'https://anthusai.github.io/Biblicus/',
+    href: 'https://github.com/AnthusAI/Biblicus',
     kind: 'platform',
     description: 'Corpus analysis for extraction and retrieval.',
     status: 'live',
