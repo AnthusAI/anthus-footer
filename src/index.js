@@ -98,9 +98,13 @@ const baseStyles = {
   localBody: {
     display: 'block',
   },
-  localVisualFloat: {
-    float: 'right',
-    margin: '0 0 0.75rem 1rem',
+  localIntroRow: {
+    display: 'grid',
+    gridTemplateColumns: 'auto 1fr',
+    gap: '0.75rem 1rem',
+    alignItems: 'start',
+  },
+  localVisual: {
     maxWidth: '64px',
   },
   section: {
@@ -417,10 +421,8 @@ export function AnthusFooter({
   const resolvedLocalVisual = localSection?.visual || logo;
   const resolvedLocalLinks = localSection?.links || (siteId === 'anthus' ? brandLinks : []);
   const resolvedLocalLinksTitle =
-    localSection?.linksTitle || (siteId === 'anthus' ? 'Anthus Platform' : 'Product');
-  const resolvedLocalLinksTitleHref =
-    localSection?.linksTitleHref ||
-    (siteId === 'anthus' ? canonicalSites.anthusPlatform?.href : null);
+    localSection?.linksTitle || (siteId === 'anthus' ? 'Anthus' : 'Product');
+  const resolvedLocalLinksTitleHref = localSection?.linksTitleHref || null;
   const resolvedPlatformLinks =
     platformLinks || getPlatformLinks({ includeNonLive: false });
   const resolvedGlobalEyebrow =
@@ -466,31 +468,35 @@ export function AnthusFooter({
         : null,
       React.createElement(
         'div',
-        { style: baseStyles.localBody },
+        { style: baseStyles.localIntroRow },
         resolvedLocalVisual
           ? React.createElement(
               'div',
-              { key: 'local-visual', style: baseStyles.localVisualFloat },
+              { key: 'local-visual', style: baseStyles.localVisual },
               resolvedLocalVisual
             )
           : null,
-        resolvedProductTitleHref
-          ? React.createElement(
-              'h2',
-              { style: baseStyles.title(mergedTheme) },
-              React.createElement(
-                'a',
-                {
-                  href: resolvedProductTitleHref,
-                  style: baseStyles.titleLink(mergedTheme),
-                  target: localSection?.titleExternal === false ? undefined : '_blank',
-                  rel: localSection?.titleExternal === false ? undefined : 'noreferrer',
-                },
-                resolvedProductName
+        React.createElement(
+          'div',
+          { style: { display: 'grid', gap: '0.35rem' } },
+          resolvedProductTitleHref
+            ? React.createElement(
+                'h2',
+                { style: baseStyles.title(mergedTheme) },
+                React.createElement(
+                  'a',
+                  {
+                    href: resolvedProductTitleHref,
+                    style: baseStyles.titleLink(mergedTheme),
+                    target: localSection?.titleExternal === false ? undefined : '_blank',
+                    rel: localSection?.titleExternal === false ? undefined : 'noreferrer',
+                  },
+                  resolvedProductName
+                )
               )
-            )
-          : React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
-        React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedLocalDescription)
+            : React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
+          React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedLocalDescription)
+        )
       )
     ),
   ];

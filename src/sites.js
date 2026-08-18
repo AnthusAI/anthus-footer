@@ -32,6 +32,22 @@ export const canonicalSites = {
     status: 'live',
     showInFooter: true,
   },
+  anthusAbout: {
+    id: 'anthus-about',
+    label: 'About',
+    href: 'https://anth.us/about',
+    kind: 'company-page',
+    status: 'live',
+    showInFooter: true,
+  },
+  anthusPosts: {
+    id: 'anthus-posts',
+    label: 'Posts',
+    href: 'https://anth.us/posts',
+    kind: 'company-page',
+    status: 'live',
+    showInFooter: true,
+  },
   plexus: {
     id: 'plexus',
     label: 'Plexus',
@@ -109,7 +125,10 @@ export const canonicalSiteList = Object.values(canonicalSites);
 
 export const anthusLinkSiteIds = [
   'anthusSolutions',
+  'anthusPlatform',
   'anthusArticles',
+  'anthusAbout',
+  'anthusPosts',
 ];
 
 export const platformSiteIds = [
