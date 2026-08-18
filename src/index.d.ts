@@ -74,6 +74,8 @@ export type AnthusFooterProps = {
   localSection?: FooterSection;
   globalSection?: FooterSection;
   byline?: string;
+  showBottomRow?: boolean;
+  openSourceNote?: string | null;
   logo?: React.ReactNode;
   theme?: FooterTheme;
 };

@@ -408,6 +408,8 @@ export function AnthusFooter({
   localSection,
   globalSection,
   byline = 'Built by Anthus AI Solutions',
+  showBottomRow = true,
+  openSourceNote = 'Free and open-source software',
   logo,
   theme,
 }) {
@@ -566,12 +568,16 @@ export function AnthusFooter({
             ? React.createElement('div', { style: baseStyles.columns }, ...renderSectionColumns(globalColumns, mergedTheme))
             : null,
           React.createElement('div', { style: baseStyles.platformGrid }, ...renderPlatformItems(resolvedPlatformItems, mergedTheme)),
-          React.createElement(
-            'div',
-            { style: baseStyles.bottomRow(mergedTheme) },
-            React.createElement('span', null, 'Free and open-source software'),
-            React.createElement('span', null, byline)
-          )
+          showBottomRow && (openSourceNote || byline)
+            ? React.createElement(
+                'div',
+                { style: baseStyles.bottomRow(mergedTheme) },
+                openSourceNote
+                  ? React.createElement('span', null, openSourceNote)
+                  : null,
+                byline ? React.createElement('span', null, byline) : null
+              )
+            : null
         )
       )
     ) : null,
