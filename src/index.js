@@ -318,11 +318,29 @@ const renderSectionColumns = (columns, theme) =>
     React.createElement(
       'div',
       { key: column.title },
-      React.createElement(
-        'h3',
-        { style: baseStyles.columnTitle(theme) },
-        column.title
-      ),
+      column.titleHref
+        ? React.createElement(
+            'h3',
+            { style: baseStyles.columnTitle(theme) },
+            React.createElement(
+              'a',
+              {
+                href: column.titleHref,
+                style: {
+                  ...baseStyles.link(theme),
+                  fontWeight: 500,
+                },
+                target: column.titleExternal === false ? undefined : '_blank',
+                rel: column.titleExternal === false ? undefined : 'noreferrer',
+              },
+              column.title
+            )
+          )
+        : React.createElement(
+            'h3',
+            { style: baseStyles.columnTitle(theme) },
+            column.title
+          ),
       column.description
         ? React.createElement('p', { style: baseStyles.helperText(theme) }, column.description)
         : null,
@@ -393,11 +411,16 @@ export function AnthusFooter({
   const mergedTheme = mergeTheme(resolvedMode, theme);
   const site = getSiteById(siteId);
   const resolvedProductName = localSection?.title || site?.label || productName;
+  const resolvedProductTitleHref = localSection?.titleHref || null;
   const resolvedLocalEyebrow = localSection?.eyebrow || subtitle;
   const resolvedLocalDescription = localSection?.description || description;
   const resolvedLocalVisual = localSection?.visual || logo;
   const resolvedLocalLinks = localSection?.links || (siteId === 'anthus' ? brandLinks : []);
-  const resolvedLocalLinksTitle = localSection?.linksTitle || (siteId === 'anthus' ? 'Anthus' : 'Product');
+  const resolvedLocalLinksTitle =
+    localSection?.linksTitle || (siteId === 'anthus' ? 'Anthus Platform' : 'Product');
+  const resolvedLocalLinksTitleHref =
+    localSection?.linksTitleHref ||
+    (siteId === 'anthus' ? canonicalSites.anthusPlatform?.href : null);
   const resolvedPlatformLinks =
     platformLinks || getPlatformLinks({ includeNonLive: false });
   const resolvedGlobalEyebrow =
@@ -417,6 +440,8 @@ export function AnthusFooter({
   if (resolvedLocalLinks.length > 0) {
     localColumns.unshift({
       title: resolvedLocalLinksTitle,
+      titleHref: resolvedLocalLinksTitleHref,
+      titleExternal: siteId === 'anthus' ? false : undefined,
       links: resolvedLocalLinks,
     });
   }
@@ -449,7 +474,22 @@ export function AnthusFooter({
               resolvedLocalVisual
             )
           : null,
-        React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
+        resolvedProductTitleHref
+          ? React.createElement(
+              'h2',
+              { style: baseStyles.title(mergedTheme) },
+              React.createElement(
+                'a',
+                {
+                  href: resolvedProductTitleHref,
+                  style: baseStyles.titleLink(mergedTheme),
+                  target: localSection?.titleExternal === false ? undefined : '_blank',
+                  rel: localSection?.titleExternal === false ? undefined : 'noreferrer',
+                },
+                resolvedProductName
+              )
+            )
+          : React.createElement('h2', { style: baseStyles.title(mergedTheme) }, resolvedProductName),
         React.createElement('p', { style: baseStyles.description(mergedTheme) }, resolvedLocalDescription)
       )
     ),

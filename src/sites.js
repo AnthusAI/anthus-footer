@@ -1,7 +1,7 @@
 export const canonicalSites = {
   anthus: {
     id: 'anthus',
-    label: 'Anth.us',
+    label: 'Anthus',
     href: 'https://anth.us/',
     kind: 'company',
     description: 'Company, delivery model, and platform home.',
@@ -108,9 +108,7 @@ export const canonicalSites = {
 export const canonicalSiteList = Object.values(canonicalSites);
 
 export const anthusLinkSiteIds = [
-  'anthus',
   'anthusSolutions',
-  'anthusPlatform',
   'anthusArticles',
 ];
 
