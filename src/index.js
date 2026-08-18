@@ -94,15 +94,21 @@ const baseStyles = {
   localIntro: {
     display: 'grid',
     gap: '0.75rem',
+    textAlign: 'left',
+    justifyItems: 'start',
   },
   localBody: {
     display: 'block',
+    textAlign: 'left',
   },
   localIntroRow: {
     display: 'grid',
     gridTemplateColumns: 'auto 1fr',
     gap: '0.75rem 1rem',
     alignItems: 'start',
+    textAlign: 'left',
+    justifyItems: 'start',
+    width: '100%',
   },
   localVisual: {
     maxWidth: '64px',
@@ -146,6 +152,7 @@ const baseStyles = {
     lineHeight: 1.25,
     fontWeight: 400,
     fontFamily: theme.fontFamilyHeading,
+    textAlign: 'left',
   }),
   titleLink: theme => ({
     ...baseStyles.link(theme),
@@ -158,6 +165,7 @@ const baseStyles = {
     lineHeight: 1.55,
     fontWeight: 300,
     color: theme.mutedTextColor,
+    textAlign: 'left',
   }),
   columns: {
     display: 'grid',
@@ -480,7 +488,7 @@ export function AnthusFooter({
           : null,
         React.createElement(
           'div',
-          { style: { display: 'grid', gap: '0.35rem' } },
+          { style: { display: 'grid', gap: '0.35rem', textAlign: 'left', justifyItems: 'start', width: '100%' } },
           resolvedProductTitleHref
             ? React.createElement(
                 'h2',
