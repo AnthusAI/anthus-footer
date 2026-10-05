@@ -43,10 +43,10 @@ export default function Layout({ children }) {
     <>
       <main>{children}</main>
       <AnthusFooter
-        siteId="plexus"
-        productName="Plexus"
+        siteId="primus"
+        productName="Primus"
         subtitle="Part of the Anthus Platform"
-        description="Plexus is the Anthus MLOps platform and agent incubator for evaluating, deploying, and improving AI agents."
+        description="Primus is the Anthus MLOps platform and agent incubator for evaluating, deploying, and improving AI agents."
         communityLinks={defaultCommunityLinks}
         brandLinks={defaultBrandLinks}
         platformLinks={getPlatformLinks()}
@@ -54,8 +54,8 @@ export default function Layout({ children }) {
           {
             title: 'Product',
             links: [
-              { label: 'Documentation', href: 'https://anthusai.github.io/Plexus/' },
-              { label: 'GitHub', href: 'https://github.com/AnthusAI/Plexus' }
+              { label: 'Documentation', href: 'https://anthusai.github.io/Primus/' },
+              { label: 'GitHub', href: 'https://github.com/AnthusAI/Primus' }
             ]
           }
         ]}
@@ -71,7 +71,7 @@ export default function Layout({ children }) {
 
 Props:
 
-- `siteId`: Current product/site identifier such as `plexus`, `tactus`, `korporus`, or `anthus`
+- `siteId`: Current product/site identifier such as `primus`, `tactus`, `korporus`, or `anthus`
 - `productName`: Footer brand heading
 - `subtitle`: Small label above the heading
 - `description`: Main product/company description
@@ -144,7 +144,7 @@ The package is also the source of truth for official public-facing Anthus platfo
 Current live canonical URLs:
 
 - `Anthus Platform` → `https://anth.us/platform`
-- `Plexus` → `https://plexus.anth.us/`
+- `Primus` → `https://primus.anth.us/`
 - `Tactus` → `https://tactus.anth.us/`
 - `Korporus` → `https://korpor.us/`
 - `Biblicus` → `https://anthusai.github.io/Biblicus/`
@@ -162,7 +162,7 @@ Example direct registry usage:
 ```js
 import { canonicalSites, getPlatformLinks, getSiteById } from 'anthus-footer';
 
-const plexus = getSiteById('plexus');
+const primus = getSiteById('primus');
 const livePlatformLinks = getPlatformLinks();
 const canonicalPlatformUrl = canonicalSites.anthusPlatform.href;
 ```
@@ -170,7 +170,7 @@ const canonicalPlatformUrl = canonicalSites.anthusPlatform.href;
 ## Adoption notes
 
 - `Anth.us`: replace the current Gatsby footer with `AnthusFooter` and source Anthus + platform links from this package.
-- `Plexus`: use the shared footer in the dashboard landing/footer surface, but keep product-specific documentation links in an extra column.
+- `Primus`: use the shared footer in the dashboard landing/footer surface, but keep product-specific documentation links in an extra column.
 - `Tactus-web`: import the package directly as a Gatsby dependency, similar to existing GitHub-based shared dependencies in that repo.
 - `Korpor.us` and `Kanb.us`: use the shared footer for the public site layouts and keep product-specific links in an additional column.
 - `Biblicus`: keep the canonical URL in the registry immediately, but treat docs as a separate integration path. The docs footer is rendered from `docs/_templates/footer.html` and styled in `docs/_themes/biblicus_rtd/static/css/biblicus.css`, so alignment there should come from mirrored tokens/copy rather than mounting the React footer directly into Sphinx.
