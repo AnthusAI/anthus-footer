@@ -232,7 +232,7 @@ const baseStyles = {
   }),
 };
 
-const platformSiteIds = new Set(['plexus', 'tactus', 'korporus', 'biblicus', 'babulus', 'kanbus', 'caducus']);
+const platformSiteIds = new Set(['primus', 'tactus', 'korporus', 'biblicus', 'babulus', 'kanbus', 'caducus']);
 
 function useResolvedMode(mode) {
   const getInitialMode = () => {

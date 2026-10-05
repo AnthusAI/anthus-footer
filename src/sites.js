@@ -32,10 +32,10 @@ export const canonicalSites = {
     status: 'live',
     showInFooter: true,
   },
-  plexus: {
-    id: 'plexus',
-    label: 'Plexus',
-    href: 'https://plexus.anth.us/',
+  primus: {
+    id: 'primus',
+    label: 'Primus',
+    href: 'https://primus.anth.us/',
     kind: 'platform',
     description: 'MLOps platform for agent evaluation and iteration.',
     status: 'live',
@@ -115,7 +115,7 @@ export const anthusLinkSiteIds = [
 ];
 
 export const platformSiteIds = [
-  'plexus',
+  'primus',
   'tactus',
   'korporus',
   'biblicus',

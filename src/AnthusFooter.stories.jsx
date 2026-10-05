@@ -70,7 +70,7 @@ const korporusSiteTheme = {
   maxWidth: '1200px',
 };
 
-const plexusSiteTheme = {
+const primusSiteTheme = {
   background: 'hsl(300 20% 99%)',
   groupedBackground: 'hsl(300 7% 97%)',
   panelBackground: 'hsl(300 7% 97%)',
@@ -157,19 +157,19 @@ export const AnthusMainSite = {
   }),
 };
 
-export const PlexusVariant = {
+export const PrimusVariant = {
   args: buildArgs({
-    siteId: 'plexus',
-    title: 'Plexus',
+    siteId: 'primus',
+    title: 'Primus',
     description:
       'A comprehensive MLOps platform for managing, evaluating, and continuously improving AI agents through human-in-the-loop workflows and rigorous control loops.',
     linksTitle: 'Resources',
     links: [
       { label: 'Documentation', href: '/documentation', external: false },
-      { label: 'Python SDK', href: 'https://anthusai.github.io/Plexus/' },
-      { label: 'Change Log', href: 'https://github.com/AnthusAI/Plexus/blob/main/CHANGELOG.md' },
+      { label: 'Python SDK', href: 'https://anthusai.github.io/Primus/' },
+      { label: 'Change Log', href: 'https://github.com/AnthusAI/Primus/blob/main/CHANGELOG.md' },
     ],
-    theme: plexusSiteTheme,
+    theme: primusSiteTheme,
     mode: 'light',
   }),
 };
