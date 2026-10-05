@@ -31,10 +31,10 @@ export const canonicalSites = {
     status: 'live',
     showInFooter: true,
   },
-  plexus: {
-    id: 'plexus',
-    label: 'Plexus',
-    href: 'https://plexus.anth.us/',
+  primus: {
+    id: 'primus',
+    label: 'Primus',
+    href: 'https://primus.anth.us/',
     kind: 'platform',
     status: 'live',
     showInFooter: true,
@@ -107,7 +107,7 @@ export const anthusLinkSiteIds = [
 ];
 
 export const platformSiteIds = [
-  'plexus',
+  'primus',
   'tactus',
   'korporus',
   'biblicus',
