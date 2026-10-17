@@ -44,3 +44,9 @@ test('the default footer renders every grouped link and the shared contact URL',
   assert.ok(renderedFooterMarkup.includes(`href="${anthusContactUrl}"`));
   assert.ok(!renderedFooterMarkup.includes('docs.google.com/forms'));
 });
+
+test('the component entry is marked as a client module so server-rendered Next pages can import it', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const componentEntrySource = await readFile(new URL('../src/index.js', import.meta.url), 'utf8');
+  assert.ok(componentEntrySource.startsWith("'use client';"));
+});
