@@ -1,6 +1,6 @@
 {
   "name": "anthus-footer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared footer component for Anthus platform marketing sites",
   "type": "module",
   "main": "./src/index.js",
@@ -11,6 +11,7 @@
   },
   "homepage": "https://github.com/AnthusAI/anthus-footer",
   "scripts": {
+    "test": "node --test test/*.test.js",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
