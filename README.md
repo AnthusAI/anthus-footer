@@ -58,11 +58,13 @@ export default function Layout({ children }) {
 
 Leave `communityLinks` and `platformLinks` unset so every site renders the same contact link and the same grouped registry. Pass only what is local to the site: its description, logo, product columns, and theme.
 
-Pin a released tag rather than a branch:
+Sites track the `main` branch so a rebuild picks up the current footer:
 
 ```json
-"anthus-footer": "github:AnthusAI/anthus-footer#v0.2.0"
+"anthus-footer": "github:AnthusAI/anthus-footer#main"
 ```
+
+A lockfile still records the commit it installed, so run `npm update anthus-footer` as part of the site's build, right after the install step, to move it to the current `main`. Because every site builds from `main`, CI runs `npm test` and the Storybook build on every pull request and push, and a change should only land when both pass. Tags such as `v0.2.0` mark releases for anyone who wants to pin one.
 
 ## API
 
