@@ -252,39 +252,35 @@ const baseStyles = {
   }),
 };
 
-function useResolvedMode(mode) {
-  const getInitialMode = () => {
-    if (mode === 'light' || mode === 'dark') {
-      return mode;
-    }
-    if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return 'dark';
-  };
+const readPreferredColorMode = () => {
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return 'dark';
+};
 
-  const [resolvedMode, setResolvedMode] = React.useState(getInitialMode);
+function usePreferredColorMode() {
+  const [preferredColorMode, setPreferredColorMode] = React.useState('dark');
 
   React.useEffect(() => {
-    if (mode === 'light' || mode === 'dark') {
-      setResolvedMode(mode);
-      return undefined;
-    }
-
     if (typeof window === 'undefined' || !window.matchMedia) {
-      setResolvedMode('dark');
       return undefined;
     }
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const syncMode = () => setResolvedMode(mediaQuery.matches ? 'dark' : 'light');
+    const syncPreferredColorMode = () => setPreferredColorMode(readPreferredColorMode());
 
-    syncMode();
-    mediaQuery.addEventListener('change', syncMode);
-    return () => mediaQuery.removeEventListener('change', syncMode);
-  }, [mode]);
+    syncPreferredColorMode();
+    mediaQuery.addEventListener('change', syncPreferredColorMode);
+    return () => mediaQuery.removeEventListener('change', syncPreferredColorMode);
+  }, []);
 
-  return resolvedMode;
+  return preferredColorMode;
+}
+
+function AnthusFooterFollowingPreferredColorMode(props) {
+  const preferredColorMode = usePreferredColorMode();
+  return React.createElement(AnthusFooterInResolvedMode, { ...props, resolvedMode: preferredColorMode });
 }
 
 const normalizeTheme = theme => {
@@ -418,9 +414,19 @@ const renderCommunityItems = (items, theme) =>
     )
   );
 
-export function AnthusFooter({
+export function AnthusFooter(props) {
+  if (props.mode === 'auto') {
+    return React.createElement(AnthusFooterFollowingPreferredColorMode, props);
+  }
+  return React.createElement(AnthusFooterInResolvedMode, {
+    ...props,
+    resolvedMode: props.mode === 'light' ? 'light' : 'dark',
+  });
+}
+
+function AnthusFooterInResolvedMode({
   siteId = 'anthus',
-  mode = 'dark',
+  resolvedMode,
   className,
   productName = 'Anthus AI Solutions',
   subtitle = '',
@@ -438,7 +444,6 @@ export function AnthusFooter({
   logo,
   theme,
 }) {
-  const resolvedMode = useResolvedMode(mode);
   const mergedTheme = mergeTheme(resolvedMode, theme);
   const site = getSiteById(siteId);
   const resolvedProductName = localSection?.title || site?.label || productName;

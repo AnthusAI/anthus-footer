@@ -50,3 +50,11 @@ test('the component entry is marked as a client module so server-rendered Next p
   const componentEntrySource = await readFile(new URL('../src/index.js', import.meta.url), 'utf8');
   assert.ok(componentEntrySource.startsWith("'use client';"));
 });
+
+test('a fixed color mode renders without React hooks so server prerender cannot trip on them', () => {
+  const footerElement = AnthusFooter({ siteId: 'primus', mode: 'light' });
+  assert.equal(typeof footerElement.type, 'function');
+  const renderedFooterElementCalledOutsideReact = footerElement.type(footerElement.props);
+  assert.equal(renderedFooterElementCalledOutsideReact.type, 'footer');
+  assert.equal(renderedFooterElementCalledOutsideReact.props['data-color-mode'], 'light');
+});
