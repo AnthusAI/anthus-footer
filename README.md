@@ -32,11 +32,7 @@ Or in `package.json`:
 
 ```js
 import React from 'react';
-import AnthusFooter, {
-  defaultCommunityLinks,
-  defaultBrandLinks,
-  getPlatformLinks
-} from 'anthus-footer';
+import AnthusFooter from 'anthus-footer';
 
 export default function Layout({ children }) {
   return (
@@ -44,12 +40,7 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <AnthusFooter
         siteId="primus"
-        productName="Primus"
-        subtitle="Part of the Anthus Platform"
-        description="Primus is the Anthus MLOps platform and agent incubator for evaluating, deploying, and improving AI agents."
-        communityLinks={defaultCommunityLinks}
-        brandLinks={defaultBrandLinks}
-        platformLinks={getPlatformLinks()}
+        description="Primus is the Anthus MLOps platform for evaluating, deploying, and improving AI agents."
         additionalColumns={[
           {
             title: 'Product',
@@ -65,6 +56,14 @@ export default function Layout({ children }) {
 }
 ```
 
+Leave `communityLinks` and `platformLinks` unset so every site renders the same contact link and the same grouped registry. Pass only what is local to the site: its description, logo, product columns, and theme.
+
+Pin a released tag rather than a branch:
+
+```json
+"anthus-footer": "github:AnthusAI/anthus-footer#v0.2.0"
+```
+
 ## API
 
 ### `AnthusFooter`
@@ -75,9 +74,9 @@ Props:
 - `productName`: Footer brand heading
 - `subtitle`: Small label above the heading
 - `description`: Main product/company description
-- `communityLinks`: Top-row links such as contact, GitHub, LinkedIn, Discord
+- `communityLinks`: Bottom-row links; defaults to the shared contact URL, GitHub and LinkedIn
 - `brandLinks`: Default Anthus links shown in a standard column
-- `platformLinks`: Platform project links, usually sourced from the canonical site registry
+- `platformLinks`: Legacy flat list of registry links. Leave it unset to render the registry grouped by role (Products, Open source we use, Research)
 - `additionalColumns`: Additional footer columns in the form:
 
 ```js
@@ -94,7 +93,8 @@ Props:
 ]
 ```
 
-- `byline`: Bottom-row text
+- `byline`: Bottom-row text, `© Anthus AI Solutions` by default
+- `bylineHref`: Where the byline links, `https://anth.us/` by default
 - `logo`: Optional React node rendered above the brand copy
 - `className`: Optional class on the root `<footer>` element
 - `theme`: Optional style overrides
@@ -128,43 +128,39 @@ Theme values can be plain colors or CSS variable references such as `var(--foote
 ## Exports
 
 - `AnthusFooter`
+- `anthusContactUrl`
 - `defaultCommunityLinks`
 - `defaultBrandLinks`
 - `defaultPlatformLinks`
+- `footerGroups`
 - `canonicalSites`
 - `canonicalSiteList`
 - `getSiteById`
 - `getAnthusLinks`
+- `getFooterLinkGroups`
 - `getPlatformLinks`
 
 ## Canonical site registry
 
-The package is also the source of truth for official public-facing Anthus platform URLs.
+The package is the source of truth for official public-facing Anthus URLs, and for the one contact URL every site uses.
 
-Current live canonical URLs:
+Contact: `https://anth.us/engage`. When Prospectus exposes a public intake form, change `anthusContactUrl` here and every site follows on its next build.
 
-- `Anthus Platform` → `https://anth.us/platform`
-- `Primus` → `https://primus.anth.us/`
-- `Tactus` → `https://tactus.anth.us/`
-- `Korporus` → `https://korpor.us/`
-- `Biblicus` → `https://anthusai.github.io/Biblicus/`
-- `Babulus` → `https://babul.us/`
-- `Kanbus` → `https://kanb.us/`
-- `Caducus` → `https://caduc.us/`
+Shown in the footer, grouped by role:
 
-Excluded for now:
+- Products: Cyclotron (`https://cyclotron.anth.us/`), Chatticus (`https://chattic.us/`), Papyrus (`https://p.apyr.us/`), Auritus (`https://aurit.us/`), Primus (`https://primus.anth.us/`)
+- Open source we use: Tactus (`https://tactus.anth.us/`), Kanbus (`https://kanb.us/`), Biblicus (`https://github.com/AnthusAI/Biblicus`)
+- Research: Hard Decisions (`https://hard-decisions.anth.us/`), Biased Decisions (`https://biased-decisions.anth.us/`)
 
-- `Virtuus` is present in the registry but not shown in live footer link lists until it has an official canonical public URL.
-- `VideoML` is intentionally excluded because it is an open standard rather than an Anthus platform-marketing property.
+Kept in the registry but held back from the footer until they are on a buyer's path: Korporus, Babulus, Caducus, Virtuus. Plexus is retired; its domain redirects to Primus. VideoML is an open standard rather than an Anthus marketing property and stays out.
 
 Example direct registry usage:
 
 ```js
-import { canonicalSites, getPlatformLinks, getSiteById } from 'anthus-footer';
+import { anthusContactUrl, getFooterLinkGroups, getSiteById } from 'anthus-footer';
 
 const primus = getSiteById('primus');
-const livePlatformLinks = getPlatformLinks();
-const canonicalPlatformUrl = canonicalSites.anthusPlatform.href;
+const groupedFooterLinks = getFooterLinkGroups();
 ```
 
 ## Adoption notes

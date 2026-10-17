@@ -5,7 +5,6 @@ import AnthusFooter, {
   defaultCommunityLinks,
   defaultDarkTheme,
   defaultLightTheme,
-  getPlatformLinks,
 } from './index.js';
 
 const anthusRobot = React.createElement('img', {
@@ -110,8 +109,6 @@ const buildArgs = ({
   mode,
   communityLinks: defaultCommunityLinks,
   brandLinks: defaultBrandLinks,
-  platformLinks: getPlatformLinks(),
-  byline: 'Built by Anthus AI Solutions',
   localSection: {
     eyebrow: siteId === 'anthus' ? 'Anthus AI Solutions' : '',
     title,
@@ -120,11 +117,7 @@ const buildArgs = ({
     links,
   },
   globalSection: {
-    eyebrow: siteId === 'anthus' ? null : 'PART OF',
-    title: 'The Anthus Platform',
-    description:
-      globalDescription ||
-      'Solve complex business problems with AI and ML using a proven, reusable technology stack. These interoperable building blocks give our solutions a stronger operational foundation: durable procedures, MLOps control loops, workload orchestration, knowledge systems, observability, and programmable media workflows.',
+    description: globalDescription,
     visual: globalVisual,
     columns,
   },
@@ -148,10 +141,8 @@ export const AnthusMainSite = {
     links: [
       { label: 'About', href: 'https://anth.us/about', external: false },
       { label: 'AI Solutions', href: 'https://anth.us/ai-solutions', external: false },
-      { label: 'Articles', href: 'https://anth.us/blog', external: false },
+      { label: 'Articles', href: 'https://anth.us/articles/', external: false },
     ],
-    globalDescription:
-      'The Anthus Platform is the shared product stack behind Anthus delivery.',
     theme: anthusSiteTheme,
     mode: 'light',
   }),
@@ -286,7 +277,7 @@ export const AutomaticMode = {
     links: [
       { label: 'About', href: 'https://anth.us/about', external: false },
       { label: 'AI Solutions', href: 'https://anth.us/ai-solutions', external: false },
-      { label: 'Articles', href: 'https://anth.us/blog', external: false },
+      { label: 'Articles', href: 'https://anth.us/articles/', external: false },
     ],
     mode: 'auto',
     columns: [
@@ -312,7 +303,7 @@ export const LightMode = {
     links: [
       { label: 'About', href: 'https://anth.us/about', external: false },
       { label: 'AI Solutions', href: 'https://anth.us/ai-solutions', external: false },
-      { label: 'Articles', href: 'https://anth.us/blog', external: false },
+      { label: 'Articles', href: 'https://anth.us/articles/', external: false },
     ],
     mode: 'light',
     theme: {
@@ -337,7 +328,7 @@ export const DarkMode = {
     links: [
       { label: 'About', href: 'https://anth.us/about', external: false },
       { label: 'AI Solutions', href: 'https://anth.us/ai-solutions', external: false },
-      { label: 'Articles', href: 'https://anth.us/blog', external: false },
+      { label: 'Articles', href: 'https://anth.us/articles/', external: false },
     ],
     mode: 'dark',
     theme: {

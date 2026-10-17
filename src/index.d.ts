@@ -45,6 +45,16 @@ export type CanonicalSite = {
   description?: string;
   status: string;
   showInFooter: boolean;
+  footerGroup?: 'products' | 'open-source' | 'research';
+};
+
+export type FooterGroup = {
+  id: string;
+  title: string;
+};
+
+export type FooterLinkGroup = FooterGroup & {
+  links: FooterLink[];
 };
 
 export type FooterSection = {
@@ -74,6 +84,7 @@ export type AnthusFooterProps = {
   localSection?: FooterSection;
   globalSection?: FooterSection;
   byline?: string;
+  bylineHref?: string | null;
   showBottomRow?: boolean;
   openSourceNote?: string | null;
   logo?: React.ReactNode;
@@ -89,7 +100,11 @@ export const defaultLightTheme: FooterTheme;
 export const canonicalSites: Record<string, CanonicalSite>;
 export const canonicalSiteList: CanonicalSite[];
 
+export const anthusContactUrl: string;
+export const footerGroups: FooterGroup[];
+
 export function getSiteById(id: string): CanonicalSite | null;
+export function getFooterLinkGroups(options?: { excludeIds?: string[] }): FooterLinkGroup[];
 export function getAnthusLinks(): FooterLink[];
 export function getPlatformLinks(options?: {
   excludeIds?: string[];

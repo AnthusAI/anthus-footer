@@ -1,11 +1,20 @@
 import React from 'react';
-import { canonicalSiteList, canonicalSites, getAnthusLinks, getPlatformLinks, getSiteById } from './sites.js';
+import {
+  anthusContactUrl,
+  canonicalSiteList,
+  canonicalSites,
+  footerGroups,
+  getAnthusLinks,
+  getFooterLinkGroups,
+  getPlatformLinks,
+  getSiteById,
+} from './sites.js';
 
 export const defaultCommunityLinks = [
   {
     label: 'Contact us',
-    href: 'https://docs.google.com/forms/d/e/1FAIpQLSdWlt4KpwPSBHzg3o8fikHcfrzxo5rCcV-0-zDt815NZ1tcyg/viewform?usp=sf_link',
-    description: 'How can we help?',
+    href: anthusContactUrl,
+    description: 'Tell us what you need.',
   },
   {
     label: 'GitHub',
@@ -16,11 +25,6 @@ export const defaultCommunityLinks = [
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/ryanalynporter/',
     description: 'Company updates.',
-  },
-  {
-    label: 'Discord',
-    href: 'https://discord.gg/uStyWraJ2M',
-    description: 'Join the chat.',
   },
 ];
 
@@ -66,7 +70,9 @@ export const defaultLightTheme = {
 };
 
 const defaultGlobalDescription =
-  'This product is part of the Anthus Platform: shared runtimes, tools, and product surfaces for AI-native systems.';
+  'Products, the open-source building blocks behind them, and the public research that tests them.';
+
+const anthusCompanyUrl = 'https://anth.us/';
 
 const baseStyles = {
   footer: theme => ({
@@ -244,8 +250,6 @@ const baseStyles = {
   }),
 };
 
-const platformSiteIds = new Set(['primus', 'tactus', 'korporus', 'biblicus', 'babulus', 'kanbus', 'caducus']);
-
 function useResolvedMode(mode) {
   const getInitialMode = () => {
     if (mode === 'light' || mode === 'dark') {
@@ -381,6 +385,16 @@ const renderPlatformItems = (items, theme) =>
     )
   );
 
+const renderFooterLinkGroups = (groups, theme) =>
+  groups.map(group =>
+    React.createElement(
+      'div',
+      { key: group.id || group.title, style: baseStyles.groupedSection },
+      React.createElement('h3', { style: baseStyles.columnTitle(theme) }, group.title),
+      ...renderPlatformItems(group.links, theme)
+    )
+  );
+
 const renderCommunityItems = (items, theme) =>
   items.map(item =>
     React.createElement(
@@ -415,9 +429,10 @@ export function AnthusFooter({
   additionalColumns = [],
   localSection,
   globalSection,
-  byline = 'Built by Anthus AI Solutions',
+  byline = '© Anthus AI Solutions',
+  bylineHref = anthusCompanyUrl,
   showBottomRow = true,
-  openSourceNote = 'Free and open-source software',
+  openSourceNote = null,
   logo,
   theme,
 }) {
@@ -433,18 +448,17 @@ export function AnthusFooter({
   const resolvedLocalLinksTitle =
     localSection?.linksTitle || (siteId === 'anthus' ? 'Anthus' : 'Product');
   const resolvedLocalLinksTitleHref = localSection?.linksTitleHref || null;
-  const resolvedPlatformLinks =
-    platformLinks || getPlatformLinks({ includeNonLive: false });
+  const resolvedFooterLinkGroups = platformLinks ? null : getFooterLinkGroups();
+  const resolvedPlatformLinks = platformLinks || [];
   const resolvedGlobalEyebrow =
     globalSection?.eyebrow !== undefined
       ? globalSection.eyebrow
       : siteId === 'anthus'
       ? null
-      : 'PART OF';
-  const resolvedGlobalTitle = globalSection?.title || 'The Anthus Platform';
-  const resolvedGlobalTitleHref =
-    globalSection?.titleHref || canonicalSites['anthus-platform']?.href || 'https://anth.us/platform';
-  const resolvedGlobalDescription = globalSection?.description || 'Solve complex business problems with AI and ML using a proven, reusable technology stack. These interoperable building blocks give our solutions a stronger operational foundation: durable procedures, MLOps control loops, workload orchestration, knowledge systems, observability, and programmable media workflows.';
+      : 'MADE BY';
+  const resolvedGlobalTitle = globalSection?.title || 'Anthus AI Solutions';
+  const resolvedGlobalTitleHref = globalSection?.titleHref || canonicalSites.anthus.href;
+  const resolvedGlobalDescription = globalSection?.description || defaultGlobalDescription;
   const resolvedGlobalVisual = globalSection?.visual || null;
   const resolvedGlobalColumns = globalSection?.columns || [];
   const localColumns = [...additionalColumns];
@@ -575,7 +589,9 @@ export function AnthusFooter({
           globalColumns.length > 0
             ? React.createElement('div', { style: baseStyles.columns }, ...renderSectionColumns(globalColumns, mergedTheme))
             : null,
-          React.createElement('div', { style: baseStyles.platformGrid }, ...renderPlatformItems(resolvedPlatformItems, mergedTheme)),
+          resolvedFooterLinkGroups
+            ? React.createElement('div', { style: baseStyles.platformGrid }, ...renderFooterLinkGroups(resolvedFooterLinkGroups, mergedTheme))
+            : React.createElement('div', { style: baseStyles.platformGrid }, ...renderPlatformItems(resolvedPlatformItems, mergedTheme)),
           showBottomRow && (openSourceNote || byline)
             ? React.createElement(
                 'div',
@@ -583,7 +599,15 @@ export function AnthusFooter({
                 openSourceNote
                   ? React.createElement('span', null, openSourceNote)
                   : null,
-                byline ? React.createElement('span', null, byline) : null
+                byline
+                  ? bylineHref
+                    ? React.createElement(
+                        'a',
+                        { href: bylineHref, style: { ...baseStyles.link(mergedTheme), color: mergedTheme.mutedTextColor } },
+                        byline
+                      )
+                    : React.createElement('span', null, byline)
+                  : null
               )
             : null
         )
@@ -602,9 +626,12 @@ export function AnthusFooter({
 }
 
 export {
+  anthusContactUrl,
   canonicalSiteList,
   canonicalSites,
+  footerGroups,
   getAnthusLinks,
+  getFooterLinkGroups,
   getPlatformLinks,
   getSiteById,
 };
