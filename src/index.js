@@ -283,28 +283,30 @@ function AnthusFooterFollowingPreferredColorMode(props) {
   return React.createElement(AnthusFooterInResolvedMode, { ...props, resolvedMode: preferredColorMode });
 }
 
-const normalizeTheme = theme => {
+const withoutUndefinedValues = source =>
+  Object.fromEntries(Object.entries(source).filter(([, value]) => value !== undefined));
+
+const resolveThemeAliases = theme => {
   const source = theme || {};
 
-  return {
+  return withoutUndefinedValues({
     ...source,
     footerBackground: source.background ?? source.footerBackground,
     groupedBackground: source.groupedBackground ?? source.accentBackground,
-    panelBackground: source.panelBackground,
     textColor: source.foreground ?? source.textColor,
     mutedTextColor: source.mutedForeground ?? source.mutedTextColor,
     linkColor: source.link ?? source.linkColor ?? source.foreground ?? source.textColor,
-    fontFamilyBody: source.fontFamilyBody ?? source.fontFamily ?? 'inherit',
-    fontFamilyHeading:
-      source.fontFamilyHeading ?? source.fontFamilyBody ?? source.fontFamily ?? 'inherit',
-  };
+    fontFamilyBody: source.fontFamilyBody ?? source.fontFamily,
+    fontFamilyHeading: source.fontFamilyHeading ?? source.fontFamilyBody ?? source.fontFamily,
+  });
 };
 
-const mergeTheme = (mode, theme) =>
-  normalizeTheme({
-    ...(mode === 'light' ? defaultLightTheme : defaultDarkTheme),
-    ...(theme || {}),
-  });
+const mergeTheme = (mode, theme) => ({
+  fontFamilyBody: 'inherit',
+  fontFamilyHeading: 'inherit',
+  ...resolveThemeAliases(mode === 'light' ? defaultLightTheme : defaultDarkTheme),
+  ...resolveThemeAliases(theme),
+});
 
 const renderLinks = (links, theme) =>
   links.map(link =>

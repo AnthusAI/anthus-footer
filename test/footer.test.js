@@ -58,3 +58,15 @@ test('a fixed color mode renders without React hooks so server prerender cannot 
   assert.equal(renderedFooterElementCalledOutsideReact.type, 'footer');
   assert.equal(renderedFooterElementCalledOutsideReact.props['data-color-mode'], 'light');
 });
+
+test('a site theme written with the older key names still overrides the default colors', () => {
+  const renderedFooterMarkup = renderToStaticMarkup(
+    React.createElement(AnthusFooter, {
+      siteId: 'prospectus',
+      theme: { footerBackground: 'rgb(1, 2, 3)', textColor: 'rgb(4, 5, 6)', accentBackground: 'rgb(7, 8, 9)' },
+    })
+  );
+  assert.ok(renderedFooterMarkup.includes('background-color:rgb(1, 2, 3)'));
+  assert.ok(renderedFooterMarkup.includes('color:rgb(4, 5, 6)'));
+  assert.ok(renderedFooterMarkup.includes('background-color:rgb(7, 8, 9)'));
+});
