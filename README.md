@@ -151,7 +151,7 @@ Contact: `https://anth.us/engage`. When Prospectus exposes a public intake form,
 Shown in the footer, grouped by role:
 
 - Products: Cyclotron (`https://cyclotron.anth.us/`), Chatticus (`https://chattic.us/`), Papyrus (`https://p.apyr.us/`), Auritus (`https://aurit.us/`)
-- Open source we use: Tactus (`https://tactus.anth.us/`), Kanbus (`https://kanb.us/`), Biblicus (`https://github.com/AnthusAI/Biblicus`)
+- Open source we use: Tactus (`https://tactus.anth.us/`), Kanbus (`https://kanb.us/`), Biblicus (`https://github.com/AnthusAI/Biblicus`), Markus (`https://markus.anth.us/`)
 - Research: Hard Decisions (`https://hard-decisions.anth.us/`), Biased Decisions (`https://biased-decisions.anth.us/`)
 
 Kept in the registry but held back from the footer until they are on a buyer's path: Primus, Korporus, Babulus, Caducus, Virtuus. Plexus is retired; its domain redirects to Primus. VideoML is an open standard rather than an Anthus marketing property and stays out.

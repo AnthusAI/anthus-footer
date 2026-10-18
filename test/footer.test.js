@@ -31,6 +31,12 @@ test('the Products group lists exactly the four featured products', () => {
   );
 });
 
+test('Markus is listed under open source we use', () => {
+  const openSourceGroup = getFooterLinkGroups().find(group => group.id === 'open-source');
+  const markusLink = openSourceGroup.links.find(link => link.label === 'Markus');
+  assert.equal(markusLink.href, 'https://markus.anth.us/');
+});
+
 test('retired and held-back sites stay out of the footer', () => {
   const renderedFooterMarkup = renderToStaticMarkup(React.createElement(AnthusFooter, { siteId: 'cyclotron' }));
   for (const label of retiredOrHeldBackLabels) {
