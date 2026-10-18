@@ -10,7 +10,7 @@ import AnthusFooter, {
   getPlatformLinks,
 } from '../src/index.js';
 
-const retiredOrHeldBackLabels = ['Plexus', 'Korporus', 'Babulus', 'Caducus', 'Virtuus', 'Discord'];
+const retiredOrHeldBackLabels = ['Plexus', 'Primus', 'Korporus', 'Babulus', 'Caducus', 'Virtuus', 'Discord'];
 
 test('every site sends the contact link to the one shared contact URL', () => {
   const contactLink = defaultCommunityLinks.find(link => link.label === 'Contact us');
@@ -21,6 +21,14 @@ test('every site sends the contact link to the one shared contact URL', () => {
 test('footer links are grouped by role in a fixed order', () => {
   const groupTitles = getFooterLinkGroups().map(group => group.title);
   assert.deepEqual(groupTitles, ['Products', 'Open source we use', 'Research']);
+});
+
+test('the Products group lists exactly the four featured products', () => {
+  const productsGroup = getFooterLinkGroups().find(group => group.id === 'products');
+  assert.deepEqual(
+    productsGroup.links.map(link => link.label),
+    ['Cyclotron', 'Chatticus', 'Papyrus', 'Auritus'],
+  );
 });
 
 test('retired and held-back sites stay out of the footer', () => {

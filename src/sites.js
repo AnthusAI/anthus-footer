@@ -101,10 +101,9 @@ export const canonicalSites = {
     label: 'Primus',
     href: 'https://primus.anth.us/',
     kind: 'product',
-    footerGroup: 'products',
     description: 'MLOps platform for agent evaluation and iteration.',
-    status: 'live',
-    showInFooter: true,
+    status: 'held-back',
+    showInFooter: false,
   },
   tactus: {
     id: 'tactus',
